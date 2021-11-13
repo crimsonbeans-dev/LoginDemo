@@ -1,7 +1,6 @@
 import React from "react";
 import {
   AppBar,
-  Container,
   createStyles,
   IconButton,
   Menu,
@@ -13,7 +12,7 @@ import { makeStyles } from "@mui/styles";
 import { MdAccountCircle } from "react-icons/md";
 import { toast } from "react-toastify";
 import { getAuth, signOut } from "firebase/auth";
-import { firebaseApp } from "../../Utils/firebaseConfig";
+import { firebaseApp } from "../Utils/firebaseConfig";
 import { useNavigate } from "react-router";
 
 const useStyles = makeStyles(() =>

@@ -1,7 +1,7 @@
-import { Card, CardContent, Container, Grid, Typography } from "@mui/material";
+import { Card, CardContent, Container, Grid } from "@mui/material";
 import React, { useState, useMemo, useCallback } from "react";
 import materialStyles from "../../Utils/styles";
-import CAppBar from "../Shared/CAppBar";
+import CAppBar from "../../components/CAppBar";
 import CssTextField from "../Shared/CssTextField";
 import { useDropzone } from "react-dropzone";
 import { BsFillCloudArrowUpFill, BsFillCloudCheckFill } from "react-icons/bs";

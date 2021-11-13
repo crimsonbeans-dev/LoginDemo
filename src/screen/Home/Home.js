@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Card, CardContent, Container, Grid, Typography } from "@mui/material";
-import CAppBar from "../Shared/CAppBar";
+import CAppBar from "../../components/CAppBar";
 
 import { useForm } from "react-hook-form";
 import LoginSignupCard from "../../components/LoginSignupCard";
@@ -16,10 +16,12 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { firebaseApp } from "../../Utils/firebaseConfig";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import PurchaseSummary from "../../components/PurchaseSummary";
+import Footer from "../../components/Footer";
 
-function Home(props) {
+function Home() {
   const googleProvider = new GoogleAuthProvider();
   const facebookProvider = new FacebookAuthProvider();
   const githubProvider = new GithubAuthProvider();
@@ -44,16 +46,16 @@ function Home(props) {
         // const credential = GoogleAuthProvider.credentialFromResult(result);
         // const token = credential.accessToken;
         // The signed-in user info.
-        const user = result.user;
+        // const user = result.user;
         toast.success("Logged in Successfully!");
         // ...
       })
       .catch((error) => {
         // Handle Errors here.
-        const errorCode = error.code;
+        // const errorCode = error.code;
         const errorMessage = error.message;
         // The email of the user's account used.
-        const email = error.email;
+        // const email = error.email;
         toast.error(errorMessage);
         // The AuthCredential type that was used.
         // const credential = GoogleAuthProvider.credentialFromError(error);
@@ -86,13 +88,13 @@ function Home(props) {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
-        const user = userCredential.user;
+        // const user = userCredential.user;
         // ...
         console.log("result", userCredential);
         toast.success("SignUp Successfully!");
       })
       .catch((error) => {
-        const errorCode = error.code;
+        // const errorCode = error.code;
         const errorMessage = error.message;
         // ..
         console.log("error", error);
@@ -107,14 +109,14 @@ function Home(props) {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
-        const user = userCredential.user;
+        // const user = userCredential.user;
         // ...
         console.log("result", userCredential);
         toast.success("Logged in Successfully!");
         navigate("/second");
       })
       .catch((error) => {
-        const errorCode = error.code;
+        // const errorCode = error.code;
         const errorMessage = error.message;
         console.log("error", error);
         toast.error(errorMessage);
@@ -176,164 +178,10 @@ function Home(props) {
             </Card>
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
-            <Card className={classes.card}>
-              <CardContent className={classes.cardContent}>
-                <Typography className={classes.cardTitle}>
-                  Purchase Summary
-                </Typography>
-                <div
-                  style={{
-                    display: "flex",
-                    marginTop: "15px",
-                  }}
-                >
-                  <div style={{ flex: 1, minWidth: "225px" }}>
-                    <Typography className={classes.text}>Plan</Typography>
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <Typography className={classes.text}>Price</Typography>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    paddingBottom: "15px",
-                    borderBottom: "1px solid #bcbcbc",
-                  }}
-                >
-                  <div style={{ flex: 1, minWidth: "225px" }}>
-                    <Typography className={classes.title}>
-                      Personal Plus - Monthly
-                    </Typography>
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <Typography className={classes.title}>
-                      $47.00 USD
-                    </Typography>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    marginTop: "20px",
-                    paddingBottom: "15px",
-                  }}
-                >
-                  <div style={{ flex: 1, minWidth: "225px" }}>
-                    <Typography className={classes.titleThin}>
-                      Order SubTotal
-                    </Typography>
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <Typography className={classes.titleThin}>
-                      $47.00 USD
-                    </Typography>
-                  </div>
-                </div>
-
-                <div
-                  style={{
-                    display: "flex",
-                    paddingBottom: "15px",
-                  }}
-                >
-                  <div style={{ flex: 1, minWidth: "225px" }}>
-                    <Typography className={classes.titleThin}>
-                      Sales Tax
-                    </Typography>
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <Typography className={classes.titleThin}></Typography>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    paddingBottom: "15px",
-                    borderBottom: "1px solid #bcbcbc",
-                  }}
-                >
-                  <div style={{ flex: 1, minWidth: "225px" }}>
-                    <Typography className={classes.titleThin}>
-                      Monthly Total
-                    </Typography>
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <Typography className={classes.titleThin}></Typography>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    marginTop: "25px",
-                    paddingBottom: "10px",
-                  }}
-                >
-                  <div style={{ flex: 1, minWidth: "225px" }}>
-                    <Typography className={classes.title}>Due Today</Typography>
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <Typography className={classes.title}>$0.00 USD</Typography>
-                  </div>
-                </div>
-                {/* <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                  <div
-                    style={{
-                      width: "150px",
-                      display: "flex",
-                      padding: "4px 8px",
-                      borderRadius: "4px",
-                      background: "rgb(53, 230, 160)",
-                    }}
-                  >
-                    <Typography className={classes.text}>
-                      Includes 7-Day Free Trial
-                    </Typography>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    background: "rgb(232, 239, 255)",
-                    color: "rgb(36, 50, 82)",
-                    borderRadius: "4px",
-                    padding: "16px",
-                    borderLeft: "4px solid rgb(37, 86, 192)",
-                    display: "flex",
-                    marginTop: "15px",
-                  }}
-                >
-                  <Typography className={classes.text}>
-                    You will not be charged until after your trial ends on
-                    <b> November 19th, 2021</b>
-                  </Typography>
-                </div> */}
-              </CardContent>
-            </Card>
+            <PurchaseSummary />
           </Grid>
         </Grid>
-        <div
-          style={{
-            marginTop: "80px",
-            paddingLeft: "5%",
-            paddingRight: "5%",
-            marginBottom: "20px",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <div
-            style={{
-              height: "1px",
-              backgroundColor: "#bcbcbc",
-              width: "100%",
-              marginBottom: "15px",
-            }}
-          />
-          <Typography className={classes.text} style={{ alignSelf: "center" }}>
-            The Site is protected by reCAPTCHA and the Google Privacy Policy and
-            Terms of Service apply
-          </Typography>
-        </div>
+        <Footer />
       </Container>
     </div>
   );

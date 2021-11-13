@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   AiFillGoogleCircle,
   AiFillLinkedin,
@@ -26,10 +26,10 @@ function LoginSignupCard({
   onSignUp,
   onLogIn,
 }) {
-  const emailRegx =
-    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  const passRegx =
-    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*["!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"])(?=.*[a-zA-Z]).{8,}$/;
+  // eslint-disable-next-line
+  const emailRegx = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  // eslint-disable-next-line
+  const passRegx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*["!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"])(?=.*[a-zA-Z]).{8,}$/;
 
   const classes = materialStyles();
 
@@ -40,22 +40,16 @@ function LoginSignupCard({
 
   const handlePage = () => {
     reset({
-      email:'',
-      password:''
+      email: "",
+      password: "",
     });
     setLogIn((prev) => !prev);
   };
+
   const loadMoreFun = () => {
     setLoadMore((prev) => !prev);
   };
-  const onSubmit = (data) => {
-    console.log(data);
-    reset();
-    alert("Details Submited");
-  };
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
+
   return (
     <Card className={classes.card}>
       <CardContent className={classes.cardContent}>
