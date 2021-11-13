@@ -47,15 +47,20 @@ function Home() {
         // const token = credential.accessToken;
         // The signed-in user info.
         // const user = result.user;
+        navigate("/second");
         toast.success("Logged in Successfully!");
         // ...
       })
       .catch((error) => {
         // Handle Errors here.
-        // const errorCode = error.code;
+        console.log("error", error);
+        
+        const errorCode = error.code;
         const errorMessage = error.message;
         // The email of the user's account used.
         // const email = error.email;
+        if (errorCode === "auth/popup-closed-by-user") return;
+
         toast.error(errorMessage);
         // The AuthCredential type that was used.
         // const credential = GoogleAuthProvider.credentialFromError(error);
