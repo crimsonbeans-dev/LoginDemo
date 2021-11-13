@@ -26,6 +26,11 @@ function LoginSignupCard({
   onSignUp,
   onLogIn,
 }) {
+  const emailRegx =
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const passRegx =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*["!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"])(?=.*[a-zA-Z]).{8,}$/;
+
   const classes = materialStyles();
 
   const [loadMore, setLoadMore] = useState(false);
@@ -34,6 +39,10 @@ function LoginSignupCard({
   const { width } = useWindowDimensions();
 
   const handlePage = () => {
+    reset({
+      email:'',
+      password:''
+    });
     setLogIn((prev) => !prev);
   };
   const loadMoreFun = () => {
@@ -44,7 +53,9 @@ function LoginSignupCard({
     reset();
     alert("Details Submited");
   };
-
+  useEffect(() => {
+    console.log(errors);
+  }, [errors]);
   return (
     <Card className={classes.card}>
       <CardContent className={classes.cardContent}>
@@ -78,13 +89,16 @@ function LoginSignupCard({
           errors={
             errors?.email && {
               ...errors?.email,
-              message: "Email is required",
+              message:
+                errors?.email?.type === "pattern"
+                  ? "Enter a valid Email"
+                  : "Email is required",
             }
           }
           control={control}
           inputType={"text"}
           name={"email"}
-          rules={{ required: true }}
+          rules={{ required: true, pattern: emailRegx }}
         />
         <Typography className={classes.label} style={{ marginTop: "10px" }}>
           Password
@@ -101,7 +115,9 @@ function LoginSignupCard({
           control={control}
           inputType={"password"}
           name={"password"}
-          rules={{ required: true }}
+          rules={
+            logIn ? { required: true } : { required: true, pattern: passRegx }
+          }
         />
 
         {!logIn && (

@@ -1,14 +1,14 @@
 import { Card, CardContent, Container, Grid, Typography } from "@mui/material";
-import React, { useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import materialStyles from "../../Utils/styles";
 import CAppBar from "../Shared/CAppBar";
 import CssTextField from "../Shared/CssTextField";
-
 import { useDropzone } from "react-dropzone";
+import { BsFillCloudArrowUpFill, BsFillCloudCheckFill } from "react-icons/bs";
 
 const baseStyle = {
   marginTop: "20px",
-  height: "150px",
+  height: "50vh",
   flex: 1,
   display: "flex",
   flexDirection: "column",
@@ -38,9 +38,11 @@ const rejectStyle = {
 };
 
 function Dropzone(props) {
+  const [isUploaded, setIsUploaded] = useState(false);
   const onDrop = useCallback((acceptedFiles) => {
     // Do something with the files
     console.log("acceptedFiles", acceptedFiles);
+    setIsUploaded(true);
   }, []);
   const {
     getRootProps,
@@ -64,7 +66,17 @@ function Dropzone(props) {
     <div className="container">
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
+        {isUploaded ? (
+          <BsFillCloudCheckFill size={100} color={"#00e676"} />
+        ) : (
+          <BsFillCloudArrowUpFill
+            size={100}
+            color={isDragAccept ? "#00e676" : isDragReject ? "ff1744" : "grey"}
+          />
+        )}
+        {!isUploaded && (
+          <p>Drag 'n' drop some files here, or click to select files</p>
+        )}
       </div>
     </div>
   );
@@ -75,7 +87,7 @@ function Second(props) {
 
   return (
     <>
-      <CAppBar />
+      <CAppBar loggedIn />
       <Container maxWidth="lg">
         <Grid container spacing={4}>
           <Grid item xs={12} sm={12} md={8}>

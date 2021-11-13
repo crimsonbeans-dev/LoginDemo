@@ -17,13 +17,14 @@ import {
 } from "firebase/auth";
 import { firebaseApp } from "../../Utils/firebaseConfig";
 import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Home(props) {
   const googleProvider = new GoogleAuthProvider();
   const facebookProvider = new FacebookAuthProvider();
   const githubProvider = new GithubAuthProvider();
   const microsoftProvider = new OAuthProvider("microsoft.com");
-  
+
   let navigate = useNavigate();
 
   const classes = materialStyles();
@@ -44,6 +45,7 @@ function Home(props) {
         // const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
+        toast.success("Logged in Successfully!");
         // ...
       })
       .catch((error) => {
@@ -52,6 +54,7 @@ function Home(props) {
         const errorMessage = error.message;
         // The email of the user's account used.
         const email = error.email;
+        toast.error(errorMessage);
         // The AuthCredential type that was used.
         // const credential = GoogleAuthProvider.credentialFromError(error);
         // const credential = FacebookAuthProvider.credentialFromResult(result);
@@ -86,12 +89,14 @@ function Home(props) {
         const user = userCredential.user;
         // ...
         console.log("result", userCredential);
+        toast.success("SignUp Successfully!");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         // ..
         console.log("error", error);
+        toast.error(errorMessage);
       });
   };
 
@@ -105,18 +110,17 @@ function Home(props) {
         const user = userCredential.user;
         // ...
         console.log("result", userCredential);
+        toast.success("Logged in Successfully!");
         navigate("/second");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log("error", error);
+        toast.error(errorMessage);
       });
   };
 
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
   return (
     <div>
       <CAppBar />
