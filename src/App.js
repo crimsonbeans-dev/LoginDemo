@@ -6,6 +6,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { AuthProvider } from "./Utils/AuthProvider";
+import Success from "./screen/Success/Success";
 
 const id =
   "pk_test_51JvGumSETABQuM8oUtfK1gG4lpcFFhh43EXTc3jpl7vaDhpxSxbIIi30SKRQjTfPpylWqlhtPQBJXaRWfR89hfcx00k0xqeyt4";
@@ -18,18 +20,21 @@ const stripePromise = loadStripe(id);
 //   // passing the client secret obtained from the server
 //   clientSecret: '${pk_test_51JvGumSETABQuM8oUtfK1gG4lpcFFhh43EXTc3jpl7vaDhpxSxbIIi30SKRQjTfPpylWqlhtPQBJXaRWfR89hfcx00k0xqeyt4}_secret_${ca_Kb96uyQmV9C9ob1iLI89HViG7QplsY8H}',
 // };
+
+
 function App() {
   // console.log("stripePromise", stripePromise);
   return (
-    <>
+    <AuthProvider>
       <Elements stripe={stripePromise}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="second" element={<Second />} />
+          <Route path="success" element={<Success />} />
         </Routes>
       </Elements>
       <ToastContainer theme="colored" />
-    </>
+    </AuthProvider>
   );
 }
 

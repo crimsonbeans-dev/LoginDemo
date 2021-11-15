@@ -1,11 +1,13 @@
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import React from "react";
 import { BsBagCheckFill } from "react-icons/bs";
 import materialStyles from "../Utils/styles";
 import colors from "../constants/colors.json";
+import { useNavigate } from "react-router";
 
 function PaymentSuccessDialog(props) {
   const classes = materialStyles();
+  let navigate = useNavigate();
 
   const CList = ({ title, text, bold = false }) => {
     return (
@@ -65,7 +67,18 @@ function PaymentSuccessDialog(props) {
       <CList title={"Mobile"} text={"0123456789"} />
       <CList title={"Email"} text={"xyz@email.com"} />
       <CList title={"Transaction id"} text={"12345678946584"} />
-      <CList title={"Amount paid"} text={"500.00"} bold />
+      <CList title={"Amount paid"} text={"$47.00"} bold />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginTop: "20px",
+        }}
+      >
+        <Button variant="text" onClick={() => navigate("/")}>
+          Go Back
+        </Button>
+      </div>
     </>
   );
 }

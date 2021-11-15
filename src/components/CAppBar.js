@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   AppBar,
   createStyles,
@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import { getAuth, signOut } from "firebase/auth";
 import { firebaseApp } from "../Utils/firebaseConfig";
 import { useNavigate } from "react-router";
+import { AuthContext } from "../Utils/AuthProvider";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -27,7 +28,9 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export default function CAppBar({ loggedIn = false }) {
+export default function CAppBar() {
+  const { user } = useContext(AuthContext);
+
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   let navigate = useNavigate();
@@ -61,7 +64,7 @@ export default function CAppBar({ loggedIn = false }) {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           AppLogo
         </Typography>
-        {loggedIn && (
+        {user && (
           <div>
             <IconButton
               size="large"

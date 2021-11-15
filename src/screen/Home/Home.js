@@ -1,5 +1,12 @@
-import React from "react";
-import { Card, CardContent, Container, Grid, Typography } from "@mui/material";
+import React, { useContext, useState } from "react";
+import {
+  Button,
+  Card,
+  CardContent,
+  Container,
+  Grid,
+  Typography,
+} from "@mui/material";
 import CAppBar from "../../components/CAppBar";
 
 import { useForm } from "react-hook-form";
@@ -20,8 +27,12 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import PurchaseSummary from "../../components/PurchaseSummary";
 import Footer from "../../components/Footer";
+import { AuthContext } from "../../Utils/AuthProvider";
+import BillingCard from "../../components/BillingCard";
+import StripeCheckout from "react-stripe-checkout";
 
 function Home() {
+  const { user } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
   const facebookProvider = new FacebookAuthProvider();
   const githubProvider = new GithubAuthProvider();
@@ -47,14 +58,14 @@ function Home() {
         // const token = credential.accessToken;
         // The signed-in user info.
         // const user = result.user;
-        navigate("/second");
+        // navigate("/second");
         toast.success("Logged in Successfully!");
         // ...
       })
       .catch((error) => {
         // Handle Errors here.
         console.log("error", error);
-        
+
         const errorCode = error.code;
         const errorMessage = error.message;
         // The email of the user's account used.
@@ -118,7 +129,7 @@ function Home() {
         // ...
         console.log("result", userCredential);
         toast.success("Logged in Successfully!");
-        navigate("/second");
+        // navigate("/second");
       })
       .catch((error) => {
         // const errorCode = error.code;
@@ -128,52 +139,37 @@ function Home() {
       });
   };
 
+  const billingDetailsSubmit = (data) => {
+    console.log("data", data);
+  };
+
   return (
     <div>
       <CAppBar />
       <Container maxWidth="lg">
         <Grid container spacing={4}>
           <Grid item xs={12} sm={12} md={8}>
-            <LoginSignupCard
+            {!user && (
+              <LoginSignupCard
+                handleSubmit={handleSubmit}
+                control={control}
+                errors={errors}
+                reset={reset}
+                onGoogleLogin={onGoogleLogin}
+                onFacebookLogin={onFacebookLogin}
+                onGitHubLogin={onGitHubLogin}
+                onMicrosoftLogin={onMicrosoftLogin}
+                onSignUp={onSignUp}
+                onLogIn={onLogIn}
+              />
+            )}
+            <BillingCard
               handleSubmit={handleSubmit}
               control={control}
               errors={errors}
               reset={reset}
-              onGoogleLogin={onGoogleLogin}
-              onFacebookLogin={onFacebookLogin}
-              onGitHubLogin={onGitHubLogin}
-              onMicrosoftLogin={onMicrosoftLogin}
-              onSignUp={onSignUp}
-              onLogIn={onLogIn}
+              billingDetailsSubmit={billingDetailsSubmit}
             />
-            {/* <Card className={classes.card}>
-              <CardContent className={classes.cardContent}>
-                <div style={{ display: "flex" }}>
-                  <Typography className={classes.cardTitle}>
-                    Select Plan
-                  </Typography>
-                  <div
-                    style={{
-                      padding: "4px 8px",
-                      borderRadius: "4px",
-                      background: "rgb(225, 183, 255)",
-                      marginLeft: "15px",
-                    }}
-                  >
-                    <Typography className={classes.text}>
-                      Personal Plus - Monthly
-                    </Typography>
-                  </div>
-                </div>
-              </CardContent>
-            </Card> */}
-            <Card className={classes.card}>
-              <CardContent className={classes.cardContent}>
-                <Typography className={classes.cardTitle}>
-                  Billing Details
-                </Typography>
-              </CardContent>
-            </Card>
             <Card className={classes.card}>
               <CardContent className={classes.cardContent}>
                 <Typography className={classes.cardTitle}>
