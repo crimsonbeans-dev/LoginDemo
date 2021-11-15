@@ -63,7 +63,7 @@ function PaymentSuccessDialog(props) {
           Payment Successful
         </Typography>
       </div>
-      <CList title={"Payment Type"} text={"Net banking"} />
+      <CList title={"Payment Type"} text={"Card"} />
       <CList title={"Mobile"} text={"0123456789"} />
       <CList title={"Email"} text={"xyz@email.com"} />
       <CList title={"Transaction id"} text={"12345678946584"} />
