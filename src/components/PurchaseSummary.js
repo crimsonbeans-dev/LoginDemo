@@ -98,7 +98,7 @@ function PurchaseSummary() {
               <Typography className={classes.titleThin}>Sales Tax</Typography>
             </div>
             <div style={{ flex: 1 }}>
-              <Typography className={classes.titleThin}></Typography>
+              <Typography className={classes.titleThin}>$0.00 USD</Typography>
             </div>
           </div>
           <div
@@ -114,7 +114,7 @@ function PurchaseSummary() {
               </Typography>
             </div>
             <div style={{ flex: 1 }}>
-              <Typography className={classes.titleThin}></Typography>
+              <Typography className={classes.titleThin}>$74.00 USD</Typography>
             </div>
           </div>
           <div
@@ -133,7 +133,7 @@ function PurchaseSummary() {
           </div>
         </CardContent>
       </Card>
-      {user && (
+      {/* {user ? (
         <StripeCheckout
           token={makePayment}
           stripeKey="pk_test_51JvGumSETABQuM8oUtfK1gG4lpcFFhh43EXTc3jpl7vaDhpxSxbIIi30SKRQjTfPpylWqlhtPQBJXaRWfR89hfcx00k0xqeyt4"
@@ -148,7 +148,11 @@ function PurchaseSummary() {
             Pay Now
           </Button>
         </StripeCheckout>
-      )}
+      ) : (
+        <Button disabled variant="contained" className={classes.buttonNext}>
+          Pay Now
+        </Button>
+      )} */}
     </>
   );
 }

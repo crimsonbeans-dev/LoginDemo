@@ -52,14 +52,14 @@ function BillingCard({ handleSubmit, control, errors, billingDetailsSubmit }) {
             </Typography>
             <InputField
               errors={
-                errors?.mobile && {
-                  ...errors?.mobile,
+                errors?.phone && {
+                  ...errors?.phone,
                   message: "Mobile is required",
                 }
               }
               control={control}
               inputType={"number"}
-              name={"mobile"}
+              name={"phone"}
               rules={{ required: true }}
             />
             <Typography className={classes.label}>Address</Typography>
@@ -75,13 +75,13 @@ function BillingCard({ handleSubmit, control, errors, billingDetailsSubmit }) {
               name={"address"}
               rules={{ required: true }}
             />
-            <Button
+            {/* <Button
               type="submit"
               variant="contained"
               className={classes.buttonNext}
             >
               Submit
-            </Button>
+            </Button> */}
           </form>
         )}
       </CardContent>

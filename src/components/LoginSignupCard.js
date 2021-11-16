@@ -23,13 +23,16 @@ function LoginSignupCard({
   onFacebookLogin,
   onGitHubLogin,
   onMicrosoftLogin,
+  onTwitterLogin,
   onSignUp,
   onLogIn,
 }) {
   // eslint-disable-next-line
-  const emailRegx = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const emailRegx =
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   // eslint-disable-next-line
-  const passRegx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*["!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"])(?=.*[a-zA-Z]).{8,}$/;
+  const passRegx =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*["!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"])(?=.*[a-zA-Z]).{8,}$/;
 
   const classes = materialStyles();
 
@@ -249,32 +252,8 @@ function LoginSignupCard({
                 <Button
                   variant="text"
                   className={classes.socialButton}
-                  onClick={onMicrosoftLogin}
+                  onClick={onTwitterLogin}
                 >
-                  <AiFillWindows fontSize={25} style={{ marginRight: "5px" }} />
-                  Sign Up with Windows
-                </Button>
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                sm={12}
-                md={4}
-                className={classes.socialButtonGrid}
-              >
-                <Button variant="text" className={classes.socialButton}>
-                  <AiFillApple fontSize={25} style={{ marginRight: "5px" }} />
-                  Sign Up with Apple
-                </Button>
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                sm={12}
-                md={6}
-                className={classes.socialButtonGrid}
-              >
-                <Button variant="text" className={classes.socialButton}>
                   <AiFillTwitterCircle
                     fontSize={25}
                     style={{ marginRight: "5px" }}
@@ -286,10 +265,48 @@ function LoginSignupCard({
                 item
                 xs={12}
                 sm={12}
+                md={4}
+                className={classes.socialButtonGrid}
+              >
+                <Button
+                  variant="text"
+                  className={classes.socialButtonDisable}
+                  onClick={onMicrosoftLogin}
+                  disabled
+                >
+                  <AiFillWindows fontSize={25} style={{ marginRight: "5px" }} />
+                  Sign Up with Windows
+                </Button>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={12}
                 md={6}
                 className={classes.socialButtonGrid}
               >
-                <Button variant="text" className={classes.socialButton}>
+                <Button
+                  variant="text"
+                  className={classes.socialButtonDisable}
+                  disabled
+                >
+                  <AiFillApple fontSize={25} style={{ marginRight: "5px" }} />
+                  Sign Up with Apple
+                </Button>
+              </Grid>
+
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={6}
+                className={classes.socialButtonGrid}
+              >
+                <Button
+                  variant="text"
+                  className={classes.socialButtonDisable}
+                  disabled
+                >
                   <AiFillAmazonCircle
                     fontSize={25}
                     style={{ marginRight: "5px" }}

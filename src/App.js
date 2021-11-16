@@ -16,14 +16,7 @@ const secret =
 
 const stripePromise = loadStripe(id);
 
-// const options = {
-//   // passing the client secret obtained from the server
-//   clientSecret: '${pk_test_51JvGumSETABQuM8oUtfK1gG4lpcFFhh43EXTc3jpl7vaDhpxSxbIIi30SKRQjTfPpylWqlhtPQBJXaRWfR89hfcx00k0xqeyt4}_secret_${ca_Kb96uyQmV9C9ob1iLI89HViG7QplsY8H}',
-// };
-
-
 function App() {
-  // console.log("stripePromise", stripePromise);
   return (
     <AuthProvider>
       <Elements stripe={stripePromise}>

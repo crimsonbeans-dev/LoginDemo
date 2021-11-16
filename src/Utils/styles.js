@@ -60,6 +60,12 @@ const materialStyles = makeStyles({
     fontSize: "13px !important",
     textTransform: "none !important",
   },
+  socialButtonDisable: {
+    color: "rgb(36, 50, 82) !important",
+    fontSize: "13px !important",
+    textTransform: "none !important",
+    backgroundColor: "#bcbcbc !important" ,
+  },
   paymentSuccessTitle: {
     fontSize: "20px !important",
     color: "#00e676",

@@ -7,6 +7,7 @@ import {
   DialogActions,
   DialogContent,
   Grid,
+  Typography,
 } from "@mui/material";
 import React from "react";
 import materialStyles from "../../Utils/styles";
@@ -37,6 +38,7 @@ function Second(props) {
           <Grid item xs={12} sm={12} md={12}>
             <Card className={classes.card}>
               <CardContent className={classes.cardContent}>
+                <Typography className={classes.label}>Email</Typography>
                 <CssTextField />
                 <CDropzone />
               </CardContent>
