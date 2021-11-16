@@ -128,7 +128,7 @@ function PurchaseSummary() {
               <Typography className={classes.title}>Due Today</Typography>
             </div>
             <div style={{ flex: 1 }}>
-              <Typography className={classes.title}>$0.00 USD</Typography>
+              <Typography className={classes.title}>$47.00 USD</Typography>
             </div>
           </div>
         </CardContent>
