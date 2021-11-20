@@ -34,8 +34,14 @@ import BillingCard from "../../components/BillingCard";
 import StripeCheckout from "react-stripe-checkout";
 import Stripe from "../../components/Stripe";
 import { CheckoutForm } from "../../components/CheckoutForm";
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import {
+  CardElement,
+  useStripe,
+  useElements,
+  CardNumberElement,
+} from "@stripe/react-stripe-js";
 import axios from "axios";
+import CPayment from "../../components/CPayment";
 
 function Home() {
   const { user } = useContext(AuthContext);
@@ -52,6 +58,7 @@ function Home() {
 
   const classes = materialStyles();
   const {
+    register,
     handleSubmit,
     control,
     formState: { errors },
@@ -154,7 +161,7 @@ function Home() {
   };
 
   const handleSubmitSub = async (data) => {
-    console.log("eeeee");
+    console.log(data);
     if (!stripe || !elements) {
       // Stripe.js has not yet loaded.
       // Make sure to disable form submission until Stripe.js has loaded.
@@ -167,16 +174,20 @@ function Home() {
     // return
     const result = await stripe.createPaymentMethod({
       type: "card",
-      card: elements.getElement(CardElement),
+      card: elements.getElement(CardNumberElement),
       billing_details: {
-        ...data,
+        name: data.fullName,
+        email: data.email,
+        phone: data.phone,
         address: { line1: data.address, country: "US" },
       },
     });
-    console.log("Payment Method", result);  
+    console.log("Payment Method", result);
     if (result.error) {
+      toast.error(result?.error?.message);
       setLoading(false);
       console.log(result.error.message);
+      return;
     } else {
       const res = await axios.post(
         "https://voltagegreen.com.au/index/subscriptionPayment",
@@ -257,12 +268,17 @@ function Home() {
                 <Typography className={classes.cardTitle}>
                   Payment Details
                 </Typography>
+                <CPayment
+                  handleSubmitSub={handleSubmit(handleSubmitSub)}
+                  register={register}
+                  error={!errors?.email && !errors?.address && errors?.fullName}
+                />
               </CardContent>
             </Card>
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
             <PurchaseSummary />
-            {user ? (
+            {/* {user ? (
               <form onSubmit={handleSubmit(handleSubmitSub)}>
                 <CheckoutForm />
                 <Button variant="contained" type="submit" fullWidth>
@@ -281,7 +297,7 @@ function Home() {
               >
                 Pay Now
               </Button>
-            )}
+            )} */}
           </Grid>
         </Grid>
         <Footer />

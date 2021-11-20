@@ -58,3 +58,8 @@ code {
 .StripeElement.PaymentRequestButton {
   height: 40px;
 }
+
+.noBorder:focus {
+  outline: none;
+  box-shadow: 10px 11px 10px -13px rgb(0 0 0 / 26%);
+}

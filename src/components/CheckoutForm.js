@@ -56,6 +56,6 @@ export const CheckoutForm = ({ handleSubmitSub }) => {
   //     console.log(error.message);
   //   }
   // };
-
+  return null;
   return <CardElement options={CARD_ELEMENT_OPTIONS} />;
 };

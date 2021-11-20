@@ -4,6 +4,7 @@ import { BsBagCheckFill } from "react-icons/bs";
 import materialStyles from "../Utils/styles";
 import colors from "../constants/colors.json";
 import { useNavigate } from "react-router";
+import { MdOutlineDone } from "react-icons/md";
 
 function PaymentSuccessDialog(props) {
   const classes = materialStyles();
@@ -47,28 +48,41 @@ function PaymentSuccessDialog(props) {
     );
   };
   return (
-    <>
+    <div style={{ height: "20vh" }}>
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
           flexDirection: "column",
-          height: "90px",
+          height: "120px",
           paddingBottom: "10px",
         }}
       >
-        <BsBagCheckFill size={40} color={colors.success} />
+        <div
+          style={{
+            height: 60,
+            width: 60,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: colors.success,
+            borderRadius: 60,
+            marginBottom: 20,
+          }}
+        >
+          <MdOutlineDone size={40} color={"#fff"} />
+        </div>
         <Typography className={classes.paymentSuccessTitle}>
-          Payment Successful
+          Successful
         </Typography>
       </div>
-      <CList title={"Payment Type"} text={"Card"} />
+      {/* <CList title={"Payment Type"} text={"Card"} />
       <CList title={"Mobile"} text={"0123456789"} />
       <CList title={"Email"} text={"xyz@email.com"} />
       <CList title={"Transaction id"} text={"12345678946584"} />
-      <CList title={"Amount paid"} text={"$47.00"} bold />
-      <div
+      <CList title={"Amount paid"} text={"$47.00"} bold /> */}
+      {/* <div
         style={{
           display: "flex",
           justifyContent: "flex-end",
@@ -78,8 +92,8 @@ function PaymentSuccessDialog(props) {
         <Button variant="text" onClick={() => navigate("/")}>
           Go Back
         </Button>
-      </div>
-    </>
+      </div> */}
+    </div>
   );
 }
 
