@@ -67,11 +67,16 @@ function Second(props) {
     });
     setLoading(false);
     toast.success("Data Uploaded Successfully!");
-    navigate({ to: "success" });
+    navigate("/success");
     // console.log("result", res);
   };
 
   const onSubmit = () => {
+    if (url === "" && !file.name) {
+      setErr(true);
+      setFileErr(true);
+      return;
+    }
     if (url === "") {
       setErr(true);
       return;
@@ -175,19 +180,29 @@ function Second(props) {
                     Url is required
                   </span>
                 )}
-                <CDropzone fileUpload={fileUpload} userData={userData} />
-                {fileErr && (
-                  <span
-                    style={{
-                      color: "crimson",
-                      fontSize: "12px",
-                      marginLeft: "10px",
-                      marginBottom: "20px",
-                    }}
-                  >
-                    File (.pdf) is required
-                  </span>
-                )}
+                <CDropzone
+                  fileUpload={fileUpload}
+                  userData={userData}
+                  setFileErr={setFileErr}
+                />
+                <div
+                  style={{
+                    marginLeft: "10px",
+                    marginBottom: "20px",
+                  }}
+                >
+                  {fileErr && (
+                    <span
+                      style={{
+                        color: "crimson",
+                        fontSize: "12px",
+                        top: "-15px",
+                      }}
+                    >
+                      File (.pdf) is required
+                    </span>
+                  )}
+                </div>
 
                 <Button variant="contained" fullWidth onClick={onSubmit}>
                   {loading ? (

@@ -270,6 +270,7 @@ function Home() {
                 </Typography>
                 {user && (
                   <CPayment
+                    loading={loading}
                     handleSubmitSub={handleSubmit(handleSubmitSub)}
                     register={register}
                     error={

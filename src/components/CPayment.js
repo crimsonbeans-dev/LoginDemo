@@ -6,14 +6,14 @@ import {
   CardCvcElement,
   CardExpiryElement,
 } from "@stripe/react-stripe-js";
-import { Button, Typography } from "@mui/material";
+import { Button, CircularProgress, Typography } from "@mui/material";
 import materialStyles from "../Utils/styles";
 import useWindowDimensions from "../Utils/useWindowDimensions";
 import CssTextField from "../screen/Shared/CssTextField";
 import { toast } from "react-toastify";
 import { AuthContext } from "../Utils/AuthProvider";
 
-const CPayment = ({ handleSubmitSub, register, error }) => {
+const CPayment = ({ handleSubmitSub, register, error, loading = false }) => {
   const { user } = useContext(AuthContext);
 
   const { width } = useWindowDimensions();
@@ -158,7 +158,11 @@ const CPayment = ({ handleSubmitSub, register, error }) => {
               fullWidth
               disabled={!stripe}
             >
-              Pay Now
+              {loading ? (
+                <CircularProgress color="inherit" size={22} />
+              ) : (
+                "Pay Now"
+              )}
             </Button>
           ) : (
             <Button disabled variant="contained" className={classes.buttonNext}>

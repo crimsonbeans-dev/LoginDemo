@@ -114,7 +114,7 @@ function PurchaseSummary() {
               </Typography>
             </div>
             <div style={{ flex: 1 }}>
-              <Typography className={classes.titleThin}>$74.00 USD</Typography>
+              <Typography className={classes.titleThin}>$47.00 USD</Typography>
             </div>
           </div>
           <div

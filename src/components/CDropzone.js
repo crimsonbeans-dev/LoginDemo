@@ -39,12 +39,17 @@ export default function CDropzone({
   fileUpload,
   userData,
   isUploading = false,
+  setFileErr,
 }) {
   const [isUploaded, setIsUploaded] = useState(
     userData?.fileUrl ? false : false
   );
+  const [fileName, setFileName] = useState("");
   const onDrop = useCallback(async (acceptedFiles) => {
     // Do something with the files
+    setFileErr(false);
+    console.log(acceptedFiles);
+    setFileName(acceptedFiles[0]?.name);
     await fileUpload(acceptedFiles);
     setIsUploaded(true);
   }, []);
@@ -54,7 +59,7 @@ export default function CDropzone({
     isDragActive,
     isDragAccept,
     isDragReject,
-  } = useDropzone({ accept: "application/pdf", onDrop });
+  } = useDropzone({ onDrop });
 
   const style = useMemo(
     () => ({
@@ -80,8 +85,13 @@ export default function CDropzone({
             color={isDragAccept ? "#00e676" : isDragReject ? "ff1744" : "grey"}
           />
         )}
-        {!isUploaded && !isUploading && (
-          <p>Drag 'n' drop some PDFs here, or click to select PDFs</p>
+        {fileName ? (
+          <p>{fileName}</p>
+        ) : (
+          !isUploaded &&
+          !isUploading && (
+            <p>Drag 'n' drop some files here, or click to select files</p>
+          )
         )}
         {isUploading && <p>Uploading.......</p>}
       </div>
