@@ -268,11 +268,15 @@ function Home() {
                 <Typography className={classes.cardTitle}>
                   Payment Details
                 </Typography>
-                <CPayment
-                  handleSubmitSub={handleSubmit(handleSubmitSub)}
-                  register={register}
-                  error={!errors?.email && !errors?.address && errors?.fullName}
-                />
+                {user && (
+                  <CPayment
+                    handleSubmitSub={handleSubmit(handleSubmitSub)}
+                    register={register}
+                    error={
+                      !errors?.email && !errors?.address && errors?.fullName
+                    }
+                  />
+                )}
               </CardContent>
             </Card>
           </Grid>
